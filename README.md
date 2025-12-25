@@ -10,7 +10,7 @@ This solution contains:
 
 ## Prerequisites
 
-- .NET 8.0 SDK or later
+- .NET 10.0 SDK or later
 - Visual Studio 2022 (or Visual Studio Code with C# extension)
 
 ## Getting Started
