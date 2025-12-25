@@ -18,7 +18,8 @@
   "activationEvents": [
     "onCommand:viswalstudio.createWorkflow",
     "onCommand:viswalstudio.testWebhook",
-    "onCommand:viswalstudio.connectN8n"
+    "onCommand:viswalstudio.connectN8n",
+    "onCommand:viswalstudio.aiSearch"
   ],
   "main": "./src/extension.js",
   "contributes": {

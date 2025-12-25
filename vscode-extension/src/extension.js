@@ -170,7 +170,7 @@ function getWorkflowTemplate(type, name) {
                     url: "http://ollama:11434/api/generate",
                     requestMethod: "POST",
                     jsonParameters: true,
-                    bodyParametersJson: "={{ { \"model\": \"llama2\", \"prompt\": $json.body.query, \"stream\": false } }}"
+                    bodyParametersJson: "={{ { \\\"model\\\": \\\"llama2\\\", \\\"prompt\\\": \\\"{{ $json.body.query }}\\\", \\\"stream\\\": false } }}"
                 },
                 id: "ollama-node",
                 name: "Ollama AI",

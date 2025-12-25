@@ -32,7 +32,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const response = $input.item.json.response;\nconst query = $input.item.json.body.query;\n\nreturn {\n  json: {\n    query: query,\n    response: response,\n    timestamp: new Date().toISOString(),\n    model: 'llama2'\n  }\n};"
+        "jsCode": "const response = $input.item.json.response;\nconst query = $('Webhook').item.json.body.query;\n\nreturn {\n  json: {\n    query: query,\n    response: response,\n    timestamp: new Date().toISOString(),\n    model: 'llama2'\n  }\n};"
       },
       "id": "code-node",
       "name": "Format Response",

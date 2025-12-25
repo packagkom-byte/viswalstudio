@@ -27,7 +27,9 @@ echo ""
 if [ ! -f .env ]; then
     echo "📝 Creating .env file from template..."
     cp .env.example .env
-    echo "✅ .env file created. Please review and update settings if needed."
+    echo "✅ .env file created."
+    echo "⚠️  SECURITY WARNING: Default credentials are admin/admin"
+    echo "   Please change these in .env before deploying to production!"
 else
     echo "✅ .env file already exists"
 fi

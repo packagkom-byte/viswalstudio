@@ -34,7 +34,7 @@ class Viswalstudio_AI_Search_API {
         $response = wp_remote_post($endpoint, array(
             'headers' => array('Content-Type' => 'application/json'),
             'body' => json_encode(array('query' => $query)),
-            'timeout' => 30
+            'timeout' => 15
         ));
 
         if (is_wp_error($response)) {
