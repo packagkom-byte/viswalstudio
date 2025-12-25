@@ -32,7 +32,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const response = $input.item.json.response;\nconst query = $('Webhook').item.json.body.query;\n\nreturn {\n  json: {\n    query: query,\n    response: response,\n    timestamp: new Date().toISOString(),\n    model: 'llama2'\n  }\n};"
+        "jsCode": "try {\n  const response = $input.item.json.response;\n  const webhookData = $('Webhook').item.json;\n  \n  if (!webhookData || !webhookData.body || !webhookData.body.query) {\n    throw new Error('Missing query in webhook data');\n  }\n  \n  if (!response) {\n    throw new Error('No response from Ollama');\n  }\n  \n  const query = webhookData.body.query;\n  \n  return {\n    json: {\n      query: query,\n      response: response,\n      timestamp: new Date().toISOString(),\n      model: 'llama2'\n    }\n  };\n} catch (error) {\n  return {\n    json: {\n      error: error.message,\n      timestamp: new Date().toISOString()\n    }\n  };\n}"
       },
       "id": "code-node",
       "name": "Format Response",

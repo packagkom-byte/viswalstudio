@@ -44,7 +44,7 @@ class Viswalstudio_AI_Search_API {
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
 
-        if (empty($data)) {
+        if ($data === null || !is_array($data)) {
             wp_send_json_error(array('message' => 'Invalid response from AI service'));
         }
 

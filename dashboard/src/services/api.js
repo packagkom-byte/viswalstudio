@@ -22,18 +22,17 @@ export const getSystemStatus = async () => {
     ollama: 'offline'
   };
 
-  // Check n8n by testing the webhook endpoint
+  // Check n8n - try to access the main URL without auth
+  // Since we can't authenticate, we check if we get a 401 (unauthorized) which means n8n is running
   try {
-    // Use webhook endpoint instead of root URL to bypass auth
-    await axios.post(`${N8N_URL}/webhook-test/health`, {}, { 
+    await axios.get(N8N_URL, { 
       timeout: 5000,
-      validateStatus: (status) => status === 404 || status === 200 // 404 means n8n is running but workflow doesn't exist
+      validateStatus: (status) => status === 401 || status === 200
     });
     status.n8n = 'online';
   } catch (error) {
-    // If we get a network error, n8n is offline
-    // If we get 404, n8n is online but workflow doesn't exist
-    if (error.response && error.response.status === 404) {
+    if (error.response && error.response.status === 401) {
+      // 401 means n8n is running but requires auth - that's good!
       status.n8n = 'online';
     } else {
       status.n8n = 'offline';
