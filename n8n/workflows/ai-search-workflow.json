@@ -1,0 +1,101 @@
+{
+  "name": "AI-Powered Search with Ollama",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "search",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-node",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "webhookId": "search-webhook"
+    },
+    {
+      "parameters": {
+        "url": "http://ollama:11434/api/generate",
+        "authentication": "none",
+        "requestMethod": "POST",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\n  \"model\": \"llama2\",\n  \"prompt\": \"{{ $json.body.query }}\",\n  \"stream\": false\n}"
+      },
+      "id": "ollama-node",
+      "name": "Ollama AI",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "try {\n  const response = $input.item.json.response;\n  const webhookData = $('Webhook').item.json;\n  \n  if (!webhookData || !webhookData.body || !webhookData.body.query) {\n    throw new Error('Missing query in webhook data');\n  }\n  \n  if (!response) {\n    throw new Error('No response from Ollama');\n  }\n  \n  const query = webhookData.body.query;\n  \n  return {\n    json: {\n      query: query,\n      response: response,\n      timestamp: new Date().toISOString(),\n      model: 'llama2'\n    }\n  };\n} catch (error) {\n  return {\n    json: {\n      error: error.message,\n      timestamp: new Date().toISOString()\n    }\n  };\n}"
+      },
+      "id": "code-node",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {}
+      },
+      "id": "respond-node",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Ollama AI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama AI": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "id": "ai-search-workflow",
+  "meta": {
+    "instanceId": "viswalstudio"
+  },
+  "tags": []
+}

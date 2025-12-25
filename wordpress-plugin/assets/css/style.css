@@ -1,0 +1,79 @@
+/* Viswalstudio AI Search - Frontend Styles */
+
+.viswalstudio-ai-search-widget,
+.viswalstudio-ai-search-shortcode {
+    margin: 20px 0;
+}
+
+.viswalstudio-ai-search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.viswalstudio-ai-search-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.viswalstudio-ai-search-input:focus {
+    outline: none;
+    border-color: #0073aa;
+}
+
+.viswalstudio-ai-search-submit {
+    padding: 10px 20px;
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.viswalstudio-ai-search-submit:hover {
+    background-color: #005177;
+}
+
+.viswalstudio-ai-search-submit:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.viswalstudio-ai-search-results {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.viswalstudio-ai-search-loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.viswalstudio-ai-search-response {
+    line-height: 1.6;
+    color: #333;
+}
+
+.viswalstudio-ai-search-error {
+    color: #dc3232;
+    padding: 10px;
+    background-color: #fef7f7;
+    border-left: 4px solid #dc3232;
+}
+
+.viswalstudio-ai-search-timestamp {
+    font-size: 12px;
+    color: #999;
+    margin-top: 10px;
+    text-align: right;
+}

@@ -1,0 +1,80 @@
+{
+  "name": "viswalstudio-n8n-integration",
+  "displayName": "Viswalstudio n8n Integration",
+  "description": "VS Code extension for n8n workflow development with AI-powered search integration",
+  "version": "1.0.0",
+  "publisher": "viswalstudio",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/packagkom-byte/viswalstudio"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Snippets",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "viswalstudio.createWorkflow",
+        "title": "Viswalstudio: Create n8n Workflow"
+      },
+      {
+        "command": "viswalstudio.testWebhook",
+        "title": "Viswalstudio: Test Webhook"
+      },
+      {
+        "command": "viswalstudio.connectN8n",
+        "title": "Viswalstudio: Connect to n8n"
+      },
+      {
+        "command": "viswalstudio.aiSearch",
+        "title": "Viswalstudio: AI Search"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "json",
+        "path": "./snippets/n8n-workflows.json"
+      }
+    ],
+    "configuration": {
+      "title": "Viswalstudio n8n Integration",
+      "properties": {
+        "viswalstudio.n8nUrl": {
+          "type": "string",
+          "default": "http://localhost:5678",
+          "description": "URL of your n8n instance"
+        },
+        "viswalstudio.ollamaUrl": {
+          "type": "string",
+          "default": "http://localhost:11434",
+          "description": "URL of your Ollama instance"
+        },
+        "viswalstudio.webhookPath": {
+          "type": "string",
+          "default": "webhook/search",
+          "description": "Webhook path for AI search"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.75.0",
+    "eslint": "^8.0.0",
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}
