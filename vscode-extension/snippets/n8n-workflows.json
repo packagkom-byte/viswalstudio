@@ -1,0 +1,116 @@
+{
+  "n8n Webhook Node": {
+    "prefix": "n8n-webhook",
+    "body": [
+      "{",
+      "  \"parameters\": {",
+      "    \"httpMethod\": \"${1|GET,POST,PUT,DELETE|}\",",
+      "    \"path\": \"${2:webhook-path}\",",
+      "    \"responseMode\": \"responseNode\",",
+      "    \"options\": {}",
+      "  },",
+      "  \"id\": \"webhook-node\",",
+      "  \"name\": \"Webhook\",",
+      "  \"type\": \"n8n-nodes-base.webhook\",",
+      "  \"typeVersion\": 1,",
+      "  \"position\": [${3:250}, ${4:300}]",
+      "}"
+    ],
+    "description": "n8n Webhook node"
+  },
+  "n8n HTTP Request Node": {
+    "prefix": "n8n-http",
+    "body": [
+      "{",
+      "  \"parameters\": {",
+      "    \"url\": \"${1:http://example.com/api}\",",
+      "    \"requestMethod\": \"${2|GET,POST,PUT,DELETE|}\",",
+      "    \"jsonParameters\": true,",
+      "    \"options\": {}",
+      "  },",
+      "  \"id\": \"http-node\",",
+      "  \"name\": \"HTTP Request\",",
+      "  \"type\": \"n8n-nodes-base.httpRequest\",",
+      "  \"typeVersion\": 4.1,",
+      "  \"position\": [${3:450}, ${4:300}]",
+      "}"
+    ],
+    "description": "n8n HTTP Request node"
+  },
+  "n8n Ollama Request": {
+    "prefix": "n8n-ollama",
+    "body": [
+      "{",
+      "  \"parameters\": {",
+      "    \"url\": \"http://ollama:11434/api/generate\",",
+      "    \"requestMethod\": \"POST\",",
+      "    \"jsonParameters\": true,",
+      "    \"bodyParametersJson\": \"={{ { \\\"model\\\": \\\"${1:llama2}\\\", \\\"prompt\\\": $json.${2:query}, \\\"stream\\\": false } }}\"",
+      "  },",
+      "  \"id\": \"ollama-node\",",
+      "  \"name\": \"Ollama AI\",",
+      "  \"type\": \"n8n-nodes-base.httpRequest\",",
+      "  \"typeVersion\": 4.1,",
+      "  \"position\": [${3:450}, ${4:300}]",
+      "}"
+    ],
+    "description": "n8n Ollama AI request node"
+  },
+  "n8n Code Node": {
+    "prefix": "n8n-code",
+    "body": [
+      "{",
+      "  \"parameters\": {",
+      "    \"jsCode\": \"${1:// Your JavaScript code here}\"",
+      "  },",
+      "  \"id\": \"code-node\",",
+      "  \"name\": \"Code\",",
+      "  \"type\": \"n8n-nodes-base.code\",",
+      "  \"typeVersion\": 2,",
+      "  \"position\": [${2:650}, ${3:300}]",
+      "}"
+    ],
+    "description": "n8n Code node"
+  },
+  "n8n Respond to Webhook": {
+    "prefix": "n8n-respond",
+    "body": [
+      "{",
+      "  \"parameters\": {",
+      "    \"respondWith\": \"${1|json,text,html|}\",",
+      "    \"responseBody\": \"={{ $json }}\",",
+      "    \"options\": {}",
+      "  },",
+      "  \"id\": \"respond-node\",",
+      "  \"name\": \"Respond to Webhook\",",
+      "  \"type\": \"n8n-nodes-base.respondToWebhook\",",
+      "  \"typeVersion\": 1,",
+      "  \"position\": [${2:850}, ${3:300}]",
+      "}"
+    ],
+    "description": "n8n Respond to Webhook node"
+  },
+  "n8n Complete Workflow": {
+    "prefix": "n8n-workflow",
+    "body": [
+      "{",
+      "  \"name\": \"${1:My Workflow}\",",
+      "  \"nodes\": [",
+      "    $0",
+      "  ],",
+      "  \"connections\": {},",
+      "  \"active\": false,",
+      "  \"settings\": {",
+      "    \"executionOrder\": \"v1\"",
+      "  },",
+      "  \"versionId\": \"1\",",
+      "  \"id\": \"${2:my-workflow}\",",
+      "  \"meta\": {",
+      "    \"instanceId\": \"viswalstudio\"",
+      "  },",
+      "  \"tags\": []",
+      "}"
+    ],
+    "description": "Complete n8n workflow template"
+  }
+}

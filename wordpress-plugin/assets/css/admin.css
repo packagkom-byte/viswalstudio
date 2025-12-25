@@ -1,0 +1,14 @@
+/* Viswalstudio AI Search - Admin Styles */
+
+.viswalstudio-ai-search-admin {
+    max-width: 800px;
+}
+
+.viswalstudio-ai-search-admin .form-table {
+    margin-top: 20px;
+}
+
+.viswalstudio-ai-search-admin .description {
+    color: #666;
+    font-style: italic;
+}
